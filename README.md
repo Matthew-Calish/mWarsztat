@@ -85,11 +85,10 @@ flowchart LR
     I7["#7 Problem projektowy"]
     I6["#6 Uzasadnienie projektu"]
     I5["#5 Informacje podstawowe projektu"]
-    I4["#4 asd"]
     I3["#3 Etap 3"]
     I2["#2 Etap 2"]
     I1["#1 Etap 1"]
-    I66 --> I65
+    I5 --> I7
     classDef done fill:#d4edda,stroke:#28a745,color:#000
 ```
 <!-- ROADMAP:END -->
