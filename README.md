@@ -8,6 +8,7 @@ Documentation: https://www.overleaf.com/project/6adfa7efc39fa7d2add442c5/share#8
 <!-- ROADMAP:START -->
 ```mermaid
 flowchart LR
+    I85["#85 Skonfigurowanie narzędzia do tworzenia wykresu Gantta"]
     I83["#83 Mapa pojeć"]
     I82["#82 Wprowadzenie ewentualnych poprawek"]
     I81["#81 Przeprowadzenie testów i wyciągnięcie wniosków"]
