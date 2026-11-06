@@ -74,7 +74,6 @@ flowchart LR
     I18["#18 Matryca odpowiedzialności"]
     I17["#17 Diagram Gantta"]
     I16["#16 WBS - zadania"]
-    I15["#15 WBS - etapy"]
     I14["#14 Role w projekcie"]
     I13["#13 Kryteria sukcesu"]
     I12["#12 Produkty projektu"]
@@ -88,6 +87,14 @@ flowchart LR
     I3["#3 Etap 3"]
     I2["#2 Etap 2"]
     I1["#1 Etap 1"]
+    I78 --> I77
+    I76 --> I77
+    I71 --> I75
+    I71 --> I73
+    I71 --> I72
+    I65 --> I66
+    I83 --> I66
+    I61 --> I65
     I5 --> I7
     classDef done fill:#d4edda,stroke:#28a745,color:#000
 ```
