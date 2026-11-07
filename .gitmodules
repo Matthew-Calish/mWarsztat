@@ -1,0 +1,3 @@
+[submodule "wykres_gantta"]
+	path = wykres_gantta
+	url = https://github.com/kanvvu/github-projects-gantt-generator.git
