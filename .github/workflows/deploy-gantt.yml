@@ -1,0 +1,55 @@
+name: Generuj i publikuj Wykres Gantta
+
+on:
+  # Wyłącznie ręczny przycisk "Run workflow" w zakładce Actions
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pobierz repozytorium wraz z submodułem wykres_gantta
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          token: ${{ secrets.GH_PROJECT_TOKEN }}
+
+      - name: Skonfiguruj Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Pobierz dane z GitHub Project v2 i wygeneruj wykres Gantta (HTML + PNG)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          GH_PROJECT_URL: ${{ vars.GH_PROJECT_URL }}
+        run: |
+          mkdir -p _site
+          python wykres_gantta/export_github_project.py \
+            --url "$GH_PROJECT_URL" \
+            --output-prefix "_site/project_export"
+          python wykres_gantta/generate_gantt.py \
+            "_site/project_export.json" \
+            "_site/index.html" \
+            "_site/gantt_chart.png"
+
+      - name: Prześlij artefakt na GitHub Pages (index.html + gantt_chart.png)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+
+      - name: Wdróż na GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
