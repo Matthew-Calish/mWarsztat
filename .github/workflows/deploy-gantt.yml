@@ -1,7 +1,10 @@
 name: Generuj i publikuj Wykres Gantta
 
 on:
-  # Wyłącznie ręczny przycisk "Run workflow" w zakładce Actions
+  issues:
+    types: [opened, edited, closed, reopened, deleted]
+  schedule:
+    - cron: "0 6 * * *"
   workflow_dispatch:
 
 permissions:
