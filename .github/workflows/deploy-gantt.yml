@@ -2,9 +2,11 @@ name: Generuj i publikuj Wykres Gantta
 
 on:
   issues:
-    types: [opened, edited, closed, reopened, deleted]
+    types: [opened, edited, closed, reopened, deleted, milestoned, demilestoned]
+  milestone:
+    types: [created, closed, opened, edited, deleted]
   schedule:
-    - cron: "0 6 * * *"
+    - cron: "0 8 * * *"
   workflow_dispatch:
 
 permissions:
@@ -13,8 +15,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.event.issue.number || github.event.milestone.number || 'schedule' }}
+  cancel-in-progress: true
 
 jobs:
   build-and-deploy:
